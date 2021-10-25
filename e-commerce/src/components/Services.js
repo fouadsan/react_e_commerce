@@ -12,7 +12,7 @@ const Services = () => {
             built only for you
           </h3>
           <p>
-            lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50lore50
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur accusamus optio minus nostrum dolorem mollitia est repudiandae harum corrupti reprehenderit, dicta sapiente temporibus, aliquid officiis ipsam laboriosam ducimus velit! Omnis.
           </p>
         </article>
         <div className="services-center">
