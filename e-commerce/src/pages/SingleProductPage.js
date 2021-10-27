@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const SingleProductPage = () => {
-  const {id} = useParams()
+  const {id} = useParams();
   const history = useHistory()
   const {single_product_loading: loading, single_product_error: error,
   single_product: product, fetchSingleProduct} = useProductsContext();
@@ -33,7 +33,7 @@ const SingleProductPage = () => {
   }, [error])
 
   if (loading) {
-    return <Loading />
+    return <Loading />  
   }
 
   if (error) {
@@ -49,12 +49,12 @@ const SingleProductPage = () => {
         <Link to="/products" className="btn">
           back to products
         </Link>
-        <div className="products-center">
-          <ProductImages />
+        <div className="product-center">
+          <ProductImages images={images} />
           <section className="content">
             <h2>{name}</h2>
-            <Stars />
-            <h5 className="price">{formatPrice}</h5>
+            <Stars stars={stars} reviews={reviews} />
+            <h5 className="price">{formatPrice(price)}</h5>
             <p className="desc">{description}</p>
             <p className="info">
               <span>Available : </span>
@@ -69,7 +69,7 @@ const SingleProductPage = () => {
               {company}
             </p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart product={product} />}
           </section>
         </div>
       </div>
