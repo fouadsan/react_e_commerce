@@ -53,10 +53,33 @@ const filter_reducer = (state, action) => {
       
       case UPDATE_FILTERS:
         const {name, value} = action.payload
-        return ({...state, filters:{...state.filters, [name]: value}})
+        return (
+          {...state, filters:{...state.filters, [name]: value}}
+          )
       
       case FILTER_PRODUCTS:
-        return ({...state})
+        const {all_products} = state
+        const {text, category, company, color, price, shipping} = state.filters
+        let tempProds = [...all_products]
+        if (text) {
+          tempProds = tempProds.filter((product) => {
+            return product.name.toLowerCase().startsWith(text)
+          })
+        }
+        return ({...state, filtered_products: tempProds})
+
+      case CLEAR_FILTERS:
+        return(
+          {...state, filters: {
+              ...state.filters,
+              text: "",
+              category: "all",
+              company: "all",
+              color: "all",
+              price: state.filters.max_price,
+              shipping: false,
+          }}
+        )
 
     default:
       throw new Error(`No Matching "${action.type}" - action type`)
