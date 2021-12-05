@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { useProductsContext } from '../context/products_context'
-import { single_product_url as url } from '../utils/constants'
-import { formatPrice } from '../utils/helpers'
+import React, { useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
+import { single_product_url as url } from "../utils/constants";
+import { formatPrice } from "../utils/helpers";
 import {
   Loading,
   Error,
@@ -10,46 +10,59 @@ import {
   AddToCart,
   Stars,
   PageHero,
-} from '../components'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+} from "../components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const SingleProductPage = () => {
-  const {id} = useParams();
-  const history = useHistory()
-  const {single_product_loading: loading, single_product_error: error,
-  single_product: product, fetchSingleProduct} = useProductsContext();
+  const { id } = useParams();
+  const history = useHistory();
+  const {
+    single_product_loading: loading,
+    single_product_error: error,
+    single_product: product,
+    fetchSingleProduct,
+  } = useProductsContext();
 
   useEffect(() => {
-    fetchSingleProduct(`${url}${id}`)
+    fetchSingleProduct(`${url}${id}`);
     // eslint-disable-next-line
-  }, [id])
+  }, [id]);
 
   useEffect(() => {
     if (error) {
       setTimeout(() => {
-        history.push("/")
+        history.push("/");
         // eslint-disable-next-line
       }, 3000);
     }
-  }, [error])
+  }, [error]);
 
   if (loading) {
-    return <Loading />  
+    return <Loading />;
   }
 
   if (error) {
-    return <Error />
+    return <Error />;
   }
 
-  const {name, price, description, stock, stars, reviews, id: sku,
-  company, images} = product
+  const {
+    name,
+    price,
+    description,
+    stock,
+    stars,
+    reviews,
+    id: sku,
+    company,
+    images,
+  } = product;
   return (
     <Wrapper>
       <PageHero title={name} product />
       <div className="section section-center page">
         <Link to="/products" className="btn">
-          back to products
+          back to shop
         </Link>
         <div className="product-center">
           <ProductImages images={images} />
@@ -66,7 +79,7 @@ const SingleProductPage = () => {
               <span>SKU : </span>
               {sku}
             </p>
-             <p className="info">
+            <p className="info">
               <span>Brand : </span>
               {company}
             </p>
@@ -76,8 +89,8 @@ const SingleProductPage = () => {
         </div>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.main`
   .product-center {
@@ -111,6 +124,6 @@ const Wrapper = styled.main`
       font-size: 1.25rem;
     }
   }
-`
+`;
 
-export default SingleProductPage
+export default SingleProductPage;
